@@ -1,12 +1,4 @@
-# NestJS Typed DynamoDB
-
-[![npm version](https://badge.fury.io/js/nestjs-typed-dynamodb.svg)](https://badge.fury.io/js/nestjs-typed-dynamodb)
-
-## Description
-
-Opinated way to use DynamoDB with NestJS and typescript, heavily inspired by [nest-typegoose](https://github.com/kpfromer/nestjs-typegoose)
-
-## Getting Started
+# Getting Started
 
 First install this module
 
@@ -145,35 +137,3 @@ export class CatsService {
 ```
 
 Now you can use your service as you wish!
-
-## Async configuration
-
-**app.module.ts**
-
-```typescript
-import { Module } from '@nestjs/common'
-import { TypegooseModule } from 'nestjs-typegoose'
-import { CatsModule } from './cat.module.ts'
-
-@Module({
-  imports: [
-    DynamoDBModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => ({
-        AWSConfig: {
-          region: 'local',
-          accessKeyId: 'null',
-          secretAccessKey: 'null',
-        },
-        dynamoDBOptions: {
-          endpoint: config.get<string>('DYNAMODB_URL', 'localhost:8000'),
-          sslEnabled: false,
-          region: 'local-env',
-        },
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-})
-export class ApplicationModule {}
-```
