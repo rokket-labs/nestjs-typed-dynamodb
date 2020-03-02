@@ -1,6 +1,6 @@
 {
   "name": "nestjs-typed-dynamodb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NestJS DynamoDB module inspired on Typegoose syntax ",
   "main": "dist/index.js",
   "scripts": {
