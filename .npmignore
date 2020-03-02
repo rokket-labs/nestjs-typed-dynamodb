@@ -37,3 +37,4 @@ lerna-debug.log*
 
 # Gitbook build output
 _book
+/docs

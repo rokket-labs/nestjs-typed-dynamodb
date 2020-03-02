@@ -7,7 +7,9 @@
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "prepublish:doc": "cd docs && npx gitbook install && npx gitbook build ",
+    "publish:doc": "gh-pages -d docs/_book"
   },
   "author": "Garox <gabriel.perez@rokketlabs.com>",
   "license": "MIT",
@@ -19,6 +21,7 @@
     "eslint-config-rokket-labs": "^0.1.4",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "gh-pages": "^2.2.0",
     "typescript": "^3.8.2"
   },
   "peerDependencies": {
