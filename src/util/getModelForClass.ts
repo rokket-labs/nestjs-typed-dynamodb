@@ -1,13 +1,11 @@
-import { DynamoDB } from 'aws-sdk'
 import {
-  DataMapper,
-  CreateTableOptions,
-  getSchema,
+  CreateTableOptions, DataMapper, GetOptions, getSchema, PutOptions,
 } from '@aws/dynamodb-data-mapper'
+import { unmarshallItem } from '@aws/dynamodb-data-marshaller'
+import { DynamoDB } from 'aws-sdk'
+
 import { DynamoDBClass } from '../module/dynamodb.interfaces'
 import { getKeys } from './getKeys'
-import { unmarshallItem } from '@aws/dynamodb-data-marshaller'
-
 import { getTable } from './getTable'
 
 type instanceOfDynamoDBClass = InstanceType<DynamoDBClass>
@@ -49,9 +47,9 @@ export class GetModelForClass<T extends instanceOfDynamoDBClass> {
     return this.table
   }
 
-  async create(input: Partial<T>): Promise<T> {
+  async create(input: Partial<T>, options?: PutOptions): Promise<T> {
     const toSave = Object.assign(new this.dynamoDBClass(), input)
-    return this.mapper.put(toSave)
+    return this.mapper.put(toSave, options)
   }
 
   async find(input?: Partial<DynamoDBClass>): Promise<T[]> {
@@ -103,12 +101,12 @@ export class GetModelForClass<T extends instanceOfDynamoDBClass> {
     )
   }
 
-  async findByIdAndUpdate(
-    id: string,
-    update: Partial<DynamoDBClass>,
-  ): Promise<T> {
+  async findAndUpdate(update: Partial<DynamoDBClass>): Promise<T> {
     const item = await this.mapper.get(
-      Object.assign(new this.dynamoDBClass(), { id }),
+      Object.assign(new this.dynamoDBClass(), {
+        [this.hashKey]: update[this.hashKey],
+        [this.rangeKey]: update[this.rangeKey],
+      }),
     )
 
     return this.mapper.update(Object.assign(item, update))
