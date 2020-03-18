@@ -24,7 +24,7 @@ export function createDynamoDBProvider(
     const modelFactory = (dynamoDBClient: DynamoDB, mapper: DataMapper) =>
       getModelForClass<InstanceType<DynamoDBClass>>(
         dynamoDBClassWithOptions.dynamoDBClass,
-        dynamoDBClassWithOptions.tableOptions,
+        dynamoDBClassWithOptions.modelOptions,
         dynamoDBClient,
         mapper,
       )

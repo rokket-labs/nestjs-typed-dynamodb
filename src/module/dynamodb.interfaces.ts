@@ -3,20 +3,21 @@ import { ModuleMetadata } from '@nestjs/common/interfaces'
 import { DynamoDB } from 'aws-sdk'
 import { ConfigurationOptions, APIVersions } from 'aws-sdk/lib/config'
 import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
-import { CreateTableOptions } from '@aws/dynamodb-data-mapper'
+import { ModelOption } from 'dynamoose'
 
 export interface DynamoDBClass {
   new (...args: any[])
 }
 
 export interface DynamoDBClassWithOptions {
-  tableOptions: CreateTableOptions
+  modelOptions: ModelOption
   dynamoDBClass: DynamoDBClass
 }
 
 export type DynamoDBInput = DynamoDBClass | DynamoDBClassWithOptions
 
 export interface DynamoDBModuleOptions {
+  local: boolean
   dynamoDBOptions: DynamoDB.ClientConfiguration
   AWSConfig: Partial<
     ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions
