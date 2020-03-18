@@ -5,6 +5,7 @@ import {
 } from '../module/dynamodb.interfaces'
 import { model, Schema } from 'dynamoose'
 
+import { getKeys } from './getKeys'
 import { getTable } from './getTable'
 
 type instanceOfDynamoDBClass = InstanceType<DynamoDBClass>

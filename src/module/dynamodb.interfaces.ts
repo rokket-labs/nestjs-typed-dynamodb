@@ -1,7 +1,8 @@
+import { CreateTableOptions } from '@aws/dynamodb-data-mapper'
 import { Type } from '@nestjs/common'
 import { ModuleMetadata } from '@nestjs/common/interfaces'
 import { DynamoDB } from 'aws-sdk'
-import { ConfigurationOptions, APIVersions } from 'aws-sdk/lib/config'
+import { APIVersions, ConfigurationOptions } from 'aws-sdk/lib/config'
 import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
 import { ModelOption, SchemaOptions } from 'dynamoose'
 
