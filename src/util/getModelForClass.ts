@@ -14,7 +14,8 @@ export const getModelForClass = <T extends instanceOfDynamoDBClass>(
   mapper: DataMapper,
 ) => {
   const table = getTable(dynamoDBClass)
-  const schema = new Schema(getSchema(new dynamoDBClass()), {
+  const awsSchema = getSchema(new dynamoDBClass())
+  const schema = new Schema(awsSchema, {
     useDocumentTypes: true,
     useNativeBooleans: true,
   })

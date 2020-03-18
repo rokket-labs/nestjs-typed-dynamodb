@@ -17,7 +17,7 @@ export interface DynamoDBClassWithOptions {
 export type DynamoDBInput = DynamoDBClass | DynamoDBClassWithOptions
 
 export interface DynamoDBModuleOptions {
-  local: boolean
+  local?: boolean
   dynamoDBOptions: DynamoDB.ClientConfiguration
   AWSConfig: Partial<
     ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions
