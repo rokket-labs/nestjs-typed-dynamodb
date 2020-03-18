@@ -15,10 +15,7 @@ export const convertToClassWithOptions = (
   if (isDynamoDBClass(item)) {
     return {
       dynamoDBClass: item,
-      tableOptions: {
-        readCapacityUnits: 5,
-        writeCapacityUnits: 5,
-      },
+      modelOptions: {},
     }
   } else if (isDynamoDBClassWithOptions(item)) {
     return item
