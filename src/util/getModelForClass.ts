@@ -1,23 +1,21 @@
-import { DynamoDB } from 'aws-sdk'
-import { DataMapper, getSchema } from '@aws/dynamodb-data-mapper'
-import { DynamoDBClass } from '../module/dynamodb.interfaces'
-import { model, Schema, ModelOption } from 'dynamoose'
+import { getSchema } from '@aws/dynamodb-data-mapper'
+import {
+  DynamoDBClass,
+  DynamoDBClassWithOptions,
+} from '../module/dynamodb.interfaces'
+import { model, Schema } from 'dynamoose'
 
 import { getTable } from './getTable'
 
 type instanceOfDynamoDBClass = InstanceType<DynamoDBClass>
 
-export const getModelForClass = <T extends instanceOfDynamoDBClass>(
-  dynamoDBClass: DynamoDBClass,
-  modelOptions: ModelOption,
-  dynamoDBClient: DynamoDB,
-  mapper: DataMapper,
-) => {
+export const getModelForClass = <T extends instanceOfDynamoDBClass>({
+  dynamoDBClass,
+  modelOptions,
+  schemaOptions,
+}: DynamoDBClassWithOptions) => {
   const table = getTable(dynamoDBClass)
   const awsSchema = getSchema(new dynamoDBClass())
-  const schema = new Schema(awsSchema, {
-    useDocumentTypes: true,
-    useNativeBooleans: true,
-  })
+  const schema = new Schema(awsSchema, schemaOptions)
   return model<T, {}>(table, schema, modelOptions)
 }

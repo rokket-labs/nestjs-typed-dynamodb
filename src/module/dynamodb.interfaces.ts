@@ -3,7 +3,7 @@ import { ModuleMetadata } from '@nestjs/common/interfaces'
 import { DynamoDB } from 'aws-sdk'
 import { ConfigurationOptions, APIVersions } from 'aws-sdk/lib/config'
 import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
-import { ModelOption } from 'dynamoose'
+import { ModelOption, SchemaOptions } from 'dynamoose'
 
 export interface DynamoDBClass {
   new (...args: any[])
@@ -12,6 +12,7 @@ export interface DynamoDBClass {
 export interface DynamoDBClassWithOptions {
   modelOptions: ModelOption
   dynamoDBClass: DynamoDBClass
+  schemaOptions: SchemaOptions
 }
 
 export type DynamoDBInput = DynamoDBClass | DynamoDBClassWithOptions

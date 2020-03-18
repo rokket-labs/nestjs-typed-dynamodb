@@ -16,6 +16,7 @@ export const convertToClassWithOptions = (
     return {
       dynamoDBClass: item,
       modelOptions: {},
+      schemaOptions: {},
     }
   } else if (isDynamoDBClassWithOptions(item)) {
     return item
